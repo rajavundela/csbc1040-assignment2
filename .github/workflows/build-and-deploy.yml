@@ -59,6 +59,7 @@ jobs:
         working-directory: react-github-actions-build
 
   deploy-gcs:
+    runs-on: ubuntu-latest
     name: Deploy to GCS bucket
     needs: build
     permissions:
