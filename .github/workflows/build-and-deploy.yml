@@ -35,7 +35,8 @@ jobs:
         name: react-github-actions-build
         path: build
   
-  deploy:
+  deploy-s3:
+    name: Deploy to S3 bucket
     runs-on: ubuntu-latest
     # When application is successfully tested and build has been generated
     # Then we can start with deployment
@@ -80,12 +81,13 @@ jobs:
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - name: Upload build folder to 
+      - name: Upload build folder to bucket
         id: 'upload-folder'
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: react-github-actions-build
           destination: 'csbc1040assignment2'
+          parent: false
 
 
 
