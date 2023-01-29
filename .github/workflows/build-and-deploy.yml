@@ -86,7 +86,7 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: react-github-actions-build
-          destination: 'csbc1040assignment2'
+          destination: 'csbc1040assignment2.rajarv.com'
           parent: false
 
 
