@@ -29,6 +29,11 @@ jobs:
       with:
         name: react-github-actions-build
         path: build
+    - name: Share artifact inside workflow
+      uses: actions/upload-artifact@v1
+      with:
+        name: react-github-actions-build
+        path: build
   
   deploy:
     runs-on: ubuntu-latest
@@ -52,3 +57,31 @@ jobs:
       - name: Deploy to S3
         run: aws s3 sync . s3://csbc1040assignment2 --delete
         working-directory: react-github-actions-build
+
+  deploy-gcs:
+    name: Deploy to GCS bucket
+    needs: build
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Get artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: react-github-actions-build
+      
+      - name: Auth to Gcloud
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: Upload build folder to 
+        id: 'upload-folder'
+        uses: 'google-github-actions/upload-cloud-storage@v1'
+        with:
+          path: react-github-actions-build
+          destination: 'csbc1040assignment2'
+
+
+
