@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: AWS Deployment
+name: Build and Deploy to AWS and GCP
 
 on:
   push:
@@ -75,7 +75,7 @@ jobs:
         with:
           name: react-github-actions-build
       
-      - name: Auth to Gcloud
+      - name: Authentication to Gcloud
         id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
